@@ -12,8 +12,8 @@
           <nav id="breadcrumbs">
             <ul>
               <li>You are here:</li>
-              <li><a href="index.html">Home</a></li>
-              <li><a href="index.html">Blog</a></li>
+              <li><a href="{% url 'website:index_view' %}">Home</a></li>
+              <li><a href="{% url 'blog:blog_view' %}">Blog</a></li>
               <li>Blog with side bar</li>
             </ul>
           </nav>
@@ -26,16 +26,18 @@
       <div class="row">
         <div class="col-sm-8 col-md-8 col-lg-8">
           <div class="blog_large">
+            {% for post in posts %}
             <article class="post">
-              <div class="post_date"> <span class="day">28<a href="#" class="month">Nov</a></span> <span class="icon"><i
+              <div class="post_date"> <span class="day">{{ post.published_date|date:"d"}}<a href="#" class="month">{{ post.published_date|date:"M" }}</a></span> <span class="icon"><i
                     class="fa fa-file-image-o"></i> </span> </div>
               <div class="post_content medium">
                 <figure class="post_img">
 
                   <!-- Post Image Slider -->
+                  
                   <div id="slider" class="swipe">
                     <ul class="swipe-wrap">
-                      <li><img src="{% static 'images/blog/img1.jpg' %}" alt="blog post"></li>
+                      <li><img src="{{ post.image.url }}" alt="blog post"></li>
                       <li><img src="{% static 'images/blog/img2.jpg' %}" alt="blog post"></li>
                       <li><img src="{% static 'images/blog/img3.jpg' %}" alt="blog post"></li>
                     </ul>
@@ -46,119 +48,22 @@
                   </div>
                 </figure>
                 <div class="post_meta">
-                  <h2> <a href="{% url 'blog:blog_single' %}">perferendis doloribus asperiores ut labore</a> </h2>
-                  <div class="metaInfo"> <span>By <a href="#" class="admin">Admin</a> </span> <span><a
-                        href="#">Webdesign, Media, Logo</a> </span> <span><a href="#" class="admin">5</a>
-                      Comments</span> </div>
-                  <p>Lorem ipsum dolor sit amet, consectetur adip, sed do eiusmod tempor incididunt ut aut
-                    reiciendise voluptat maiores alias consequaturs aut perferendis doloribus asperiores ut labore
-                    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
-                    ut aliquip ex ea commodo consequat.</p>
-                  <a href="blog-single.html" class="btn btn-small btn-default readmore">Read More</a>
-                </div>
-              </div>
-            </article>
-            <!-- Post Image Slider End-->
-            <!-- Post Static Image Start-->
-            <article class="post">
-              <div class="post_date"> <span class="day">28<a href="#" class="month">Nov</a></span> <span class="icon"><i
-                    class="fa fa-files-o"></i> </span> </div>
-              <div class="post_content medium">
-                <figure class="post_img"> <img src="{% static 'images/blog/img1.jpg' %}" width="700" height="370"
-                    alt=" ">
-                </figure>
-                <div class="post_meta">
-                  <h2> <a href="blog-single.html">perferendis doloribus asperiores ut labore</a> </h2>
-                  <div class="metaInfo"> <span>By <a href="#" class="admin">Admin</a> </span> <span><a
-                        href="#">Webdesign, Media, Logo</a> </span> <span><a href="#" class="admin">5</a>
-                      Comments</span> </div>
-                  <p>Lorem ipsum dolor sit amet, consectetur adip, sed do eiusmod tempor incididunt ut aut
-                    reiciendise voluptat maiores alias consequaturs aut perferendis doloribus asperiores ut labore
-                    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
-                    ut aliquip ex ea commodo consequat.</p>
-                  <a href="blog-single.html" class="btn btn-small btn-default readmore">Read More</a>
-                </div>
-              </div>
-            </article>
-            <!-- Post Static Image End-->
-            <!-- Post HTML5 Video Start-->
-            <article class="post">
-              <div class="post_date"> <span class="day">28<a href="#" class="month">Nov</a></span> <span class="icon"><i
-                    class="fa fa-file-image-o"></i> </span> </div>
-              <div class="post_content medium">
-                <figure class="post_video">
-                  <div class="blogVid">
-                    <div class="video-header" style="background-size: cover;">
-                      <div class="video">
-                        <video width="100%" height="100%" controls>
-                          <source src="{% static 'video/course.mp4' %}" type="video/mp4">
-                          Your browser does not support the video tag.
-                        </video>
-                      </div>
+                  <h2> <a href="{% url 'blog:blog_single' pid=post.id %}">{{ post.title }}</a> </h2>
+                  <div class="metaInfo"> <span>By <a href="#" class="admin"> {{post.author.get_full_name}} </a> </span> <span><a
+                        href="#">Webdesign</a> </span> <span><a href="#" class="admin">5</a> 
+                      Comments</span> <span><a href="#" class="admin"> {{post.counted_views}} </a> views</span></div>
+                      <div>
+                        <span>
+                          <a href="">{{ post.category.all|join:", " }}</a>
+                      </span><br><br>
                     </div>
-                  </div>
-                </figure>
-                <div class="post_meta">
-                  <h2> <a href="blog-single.html">perferendis doloribus asperiores ut labore</a> </h2>
-                  <div class="metaInfo"> <span>By <a href="#" class="admin">Admin</a> </span> <span><a
-                        href="#">Webdesign, Media, Logo</a> </span> <span><a href="#" class="admin">5</a>
-                      Comments</span> </div>
-                  <p>Lorem ipsum dolor sit amet, consectetur adip, sed do eiusmod tempor incididunt ut aut
-                    reiciendise voluptat maiores alias consequaturs aut perferendis doloribus asperiores ut labore
-                    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
-                    ut aliquip ex ea commodo consequat.</p>
-                  <a href="blog-single.html" class="btn btn-small btn-default readmore">Read More</a>
+
+                  <p>{{ post.content  }}</p>
+                  <a href="{% url 'blog:blog_single' pid=post.id %}" class="btn btn-small btn-default readmore">Read More</a>
                 </div>
               </div>
-            </article>
-            <!-- Post HTML5 Video End-->
-            <!-- Post Vimeo Video Start-->
-            <article class="post">
-              <div class="post_date"> <span class="day">28<a href="#" class="month">Nov</a></span> <span class="icon"><i
-                    class="fa fa-file-image-o"></i> </span> </div>
-              <div class="post_content medium">
-                <figure class="post_video">
-                  <div class="video">
-                    <iframe src="http://player.vimeo.com/video/121572408?title=0&amp;byline=0&amp;portrait=0"></iframe>
-                  </div>
-                </figure>
-                <div class="post_meta">
-                  <h2> <a href="blog-single.html">perferendis doloribus asperiores ut labore</a> </h2>
-                  <div class="metaInfo"> <span>By <a href="#" class="admin">Admin</a> </span> <span><a
-                        href="#">Webdesign, Media, Logo</a> </span> <span><a href="#" class="admin">5</a>
-                      Comments</span> </div>
-                  <p>Lorem ipsum dolor sit amet, consectetur adip, sed do eiusmod tempor incididunt ut aut
-                    reiciendise voluptat maiores alias consequaturs aut perferendis doloribus asperiores ut labore
-                    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
-                    ut aliquip ex ea commodo consequat.</p>
-                  <a href="blog-single.html" class="btn btn-small btn-default readmore">Read More</a>
-                </div>
-              </div>
-            </article>
-            <!-- Post Vimeo Video End-->
-            <!-- Post Youtube Video Start-->
-            <article class="post">
-              <div class="post_date"> <span class="day">28<a href="#" class="month">Nov</a></span> <span class="icon"><i
-                    class="fa fa-file-image-o"></i> </span> </div>
-              <div class="post_content medium">
-                <figure class="post_video">
-                  <div class="video">
-                    <iframe src="https://www.youtube.com/embed/rU1vi9h3YUU" frameborder="0" allowfullscreen></iframe>
-                  </div>
-                </figure>
-                <div class="post_meta">
-                  <h2> <a href="blog-single.html">perferendis doloribus asperiores ut labore</a> </h2>
-                  <div class="metaInfo"> <span>By <a href="#" class="admin">Admin</a> </span> <span><a
-                        href="#">Webdesign, Media, Logo</a> </span> <span><a href="#" class="admin">5</a>
-                      Comments</span> </div>
-                  <p>Lorem ipsum dolor sit amet, consectetur adip, sed do eiusmod tempor incididunt ut aut
-                    reiciendise voluptat maiores alias consequaturs aut perferendis doloribus asperiores ut labore
-                    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
-                    ut aliquip ex ea commodo consequat.</p>
-                  <a href="blog-single.html" class="btn btn-small btn-default readmore">Read More</a>
-                </div>
-              </div>
-            </article>
+              {% endfor %}
+           
             <!-- Post Youtube Video End-->
           </div>
         </div>
@@ -241,4 +146,4 @@
 </section>
 <!--end wrapper-->
 
-{% endblock %}
+{% endblock %} 

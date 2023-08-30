@@ -12,8 +12,8 @@
           <nav id="breadcrumbs">
             <ul>
               <li>You are here:</li>
-              <li><a href="index.html">Home</a></li>
-              <li><a href="index.html">Blog</a></li>
+              <li><a href="{% url 'website:index_view' %}">Home</a></li>
+              <li><a href="{% url 'blog:blog_view' %}">Blog</a></li>
               <li>Blog Large Images</li>
             </ul>
           </nav>
@@ -27,7 +27,7 @@
         <div class="col-sm-8 col-md-8 col-lg-8">
           <div class="blog_large">
             <article class="post">
-              <div class="post_date"> <span class="day">28<a href="#" class="month">Nov</a></span> <span class="icon"><i
+              <div class="post_date"> <span class="day">{{ post.published_date|date:"d"}}<a href="#" class="month">{{ post.published_date|date:"M" }}</a></span> <span class="icon"><i
                     class="fa fa-file-image-o"></i> </span> </div>
               <div class="post_content medium">
                 <figure class="post_img">
@@ -46,18 +46,11 @@
                   </div>
                 </figure>
                 <div class="post_meta">
-                  <h2>Perferendis doloribus asperiores ut labore</h2>
-                  <div class="metaInfo"> <span>By <a href="#" class="admin">Admin</a> </span> <span><a
+                  <h2> {{ post.title }} </h2>
+                  <div class="metaInfo"> <span>By <a href="#" class="admin">{{ post.author.get_full_name }}</a> </span> <span><a
                         href="#">Webdesign, Media, Logo</a> </span> <span><a href="#" class="admin">5</a>
-                      Comments</span> </div>
-                  <p>Curabitur tincidunt est sit amet nibh imperdiet dapibus. Praesent tristique diam eros, At vero eos
-                    et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque
-                    corrupt At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium
-                    voluptatum deleniti atque corrupti</p>
-                  <p>Curabitur tincidunt est sit amet nibh imperdiet dapibus. Praesent tristique diam eros, At vero eos
-                    et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque
-                    corrupt At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium
-                    voluptatum deleniti atque corrupti</p>
+                      Comments</span> <span><a href="#" class="admin">{{ post.counted_views }}</a> views</span></div>
+                  <p> {{ post.content }} </p>
                 </div>
               </div>
               <section id="comments">
