@@ -157,7 +157,16 @@
         </div>
 
         <!--Sidebar Widget-->
-        {% include 'blog/blog-sidebar.html' %}
+        <aside class="col-sm-4 col-md-4 col-lg-4 sidebar">
+          <div class="sidebar_widget">
+        <!--Sidebar Widget-->
+        {% include 'blog/blog-search.html' %}
+
+        {% postcategories %}
+
+        {% latest_posts %}
+          </div>
+        </aside>
       </div>
       <!--/.row-->
     </div>

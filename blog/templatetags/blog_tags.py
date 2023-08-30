@@ -29,7 +29,7 @@ def recent_posts():
 
 #     return {'categories': cat_dict}
 
-@register.simple_tag()
+@register.inclusion_tag('blog/blog-categories.html')
 def postcategories():
     posts = Post.objects.filter(published_status=1)
     categories = Category.objects.all()
@@ -38,3 +38,9 @@ def postcategories():
         cat_dict[name] = posts.filter(category=name).count()
 
     return {'categories': cat_dict}
+
+@register.inclusion_tag('blog/blog-recent-posts.html')
+def latest_posts():
+    posts = Post.objects.filter(published_status=1).order_by('-published_date')[:3]
+
+    return {'latest_posts': posts}

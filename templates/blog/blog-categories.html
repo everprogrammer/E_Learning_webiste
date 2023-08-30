@@ -1,0 +1,10 @@
+<div class="sw_categories">
+    <div class="sw_title">
+        <h4>Categories</h4>
+    </div>
+    <ul class="arrows_list">
+        {% for name, count in categories.items %}
+        <li><a href="#">{{ name }} - {{count}} </a></li>
+        {% endfor %}
+    </ul>
+</div>
