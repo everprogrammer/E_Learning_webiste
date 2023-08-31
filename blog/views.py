@@ -11,7 +11,7 @@ def blog_view(request, **kwargs):
     if kwargs.get('author_username') != None:
         posts = posts.filter(author__username=kwargs['author_username'])
 
-    posts = Paginator(posts, 2)
+    posts = Paginator(posts, 3)
     try:
         page_number = request.GET.get('page')
         posts = posts.get_page(page_number)
@@ -26,6 +26,7 @@ def blog_view(request, **kwargs):
 def blog_single(request, pid):
     posts = Post.objects.filter(published_status=1)
     post = get_object_or_404(posts, pk=pid)
+    post.increase_views()
     context = {'post': post}
     return render(request, 'blog/blog-single.html', context)
 

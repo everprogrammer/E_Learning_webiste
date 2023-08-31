@@ -88,18 +88,28 @@
 
 
       </div>
-      <!--/.row-->
-      <div class="col-lg-12 col-md-12 col-sm-12">
-        <ul class="pagination mrgt-0">
-          <li><a href="#">&laquo;</a></li>
-          <li class="active"><a href="#">1</a></li>
-          <li><a href="#">2</a></li>
-          <li><a href="#">3</a></li>
-          <li><a href="#">4</a></li>
-          <li><a href="#">5</a></li>
-          <li><a href="#">&raquo;</a></li>
-        </ul>
+      <!--/.row-->      
+          <div class="col-lg-12 col-md-12 col-sm-12">
+              <ul class="pagination mrgt-0">
+                  {% if posts.number > 1 %}
+                  <li><a href="?page=1">&laquo;</a></li>
+                  {% endif %}
+                  {% for page_num in posts.paginator.page_range %}
+                  {% if page_num == posts.number %}
+                  <li class="active"><a href="#">{{ page_num }}</a></li>
+                  {% else %}
+                  <li><a href="?page={{ page_num }}">{{ page_num }}</a></li>
+                  {% endif %}
+                  {% endfor %}
+                  {% if posts.number < posts.paginator.num_pages %}
+                  <li><a href="?page={{ posts.paginator.num_pages }}">&raquo;</a></li>
+                  {% endif %}
+              </ul>
+          </div>
       </div>
+      
+    </div>
+    
     </div>
     <!--/.container-->
 

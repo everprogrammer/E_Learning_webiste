@@ -27,4 +27,13 @@ class Post(models.Model):
     def __str__(self):
         return self.title
     
+    def increase_views(self):
+        self.counted_views += 1
+        self.save()
+
+    def save(self, *args, **kwargs):
+        if self.id is None:
+            self.counted_views = 0
+        super(Post, self).save(*args, **kwargs)
+    
 
