@@ -9,8 +9,9 @@
     <div class="container">
       <div class="heading">
         <h1><span>Have</span>Question</h1>
-        <p>Phasellus non dolor nibh. Nullam elementum tellus pretium feugiat.<br>
-          Cras dictum tellus dui, vitae sollicitudin ipsum tincidunt in. Sed tincidunt tristique enim sed sollcitudin.</p>
+        <p>If you have any questions, please feel free to contact us for further info!<br>
+          Please note that, due to high volume of our customers, answering 
+        your queries make take a while. Thanks  </p>
       </div>
       <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5"> 
@@ -23,7 +24,8 @@
         <!-- contact from start-->
         <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7">
           <div id="message"></div>
-          <form method="post" action="php/contact.php" name="cform" id="cform">
+          <form method="post" action="{% url 'website:contact_view' %}" name="cform">
+            {% csrf_token %}
             <div class="form-row clearfix">
               <input name="name" id="name" type="text" class="col-xs-12 col-sm-12 col-md-12 col-lg-12 normal" placeholder="Your Name">
             </div>
@@ -31,10 +33,10 @@
               <input name="email" id="email" type="email" class=" col-xs-12 col-sm-12 col-md-12 col-lg-12 normal" placeholder="Email address">
             </div>
             <div class="form-row clearfix">
-              <textarea name="comments" id="comments" class="col-xs-12 col-sm-12 col-md-12 col-lg-12 normal medium" placeholder="Your Comments"></textarea>
+              <textarea name="message" id="comments" class="col-xs-12 col-sm-12 col-md-12 col-lg-12 normal medium" placeholder="Your Comments"></textarea>
             </div>
             <input type="submit" id="submit" name="send" class="button" value="Send message">
-            <div id="simple-msg"></div>
+            <!-- <div id="simple-msg"></div> -->
           </form>
         </div>
         <!-- contact from end--> 

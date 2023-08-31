@@ -13,3 +13,9 @@ class Contact(models.Model):
         
     def __str__(self):
         return self.message
+    
+class Newsletter(models.Model):
+    email = models.EmailField()
+
+    def __str__(self) -> str:
+        return self.email

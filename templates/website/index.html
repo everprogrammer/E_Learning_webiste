@@ -483,10 +483,11 @@
         </div>
         <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
           <div id="mesaj"></div>
-          <form method="post" action="php/subscribe.php" name="sform" id="subscribeform">
-            <div class="row">
+          <form method="post" action="{% url 'website:newsletter_view' %}" name="sform">
+            {% csrf_token %}
+            <div class="row"> 
               <div class="col-xs-12 col-sm-6 col-md-8 col-lg-8">
-                <input name="subemail" id="subemail" type="email" class="normal" placeholder="Email Address">
+                <input name="email" id="subemail" type="email" class="normal" placeholder="Email Address">
               </div>
               <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 button">
                 <input type="submit" id="subsubmit" name="send" class="button" value="Subscribe">
