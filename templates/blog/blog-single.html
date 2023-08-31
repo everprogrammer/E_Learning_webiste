@@ -37,9 +37,9 @@
                   <!-- Post Image Slider -->
                   <div id="slider" class="swipe">
                     <ul class="swipe-wrap">
-                      <li><img src="images/blog/img1.jpg" alt="blog post"></li>
-                      <li><img src="images/blog/img2.jpg" alt="blog post"></li>
-                      <li><img src="images/blog/img3.jpg" alt="blog post"></li>
+                      <li><img src="{{ post.image.url }}" alt="blog post"></li>
+                      <li><img src="{% static 'images/blog/img2.jpg' %}" alt="blog post"></li>
+                      <li><img src="{% static 'images/blog/img3.jpg' %}" alt="blog post"></li>
                     </ul>
                     <div class="swipe-navi">
                       <div class="swipe-left" onClick="mySwipe.prev()"><i class="fa fa-chevron-left"></i></div>
@@ -54,7 +54,7 @@
                       <div>
                         <span>
                           {% for cat in post.category.all %}
-                          <a href=""><em>{{ cat.name }}</em></a>{% if not forloop.last %},{% endif %}
+                          <a href="{% url 'blog:blog_category' cat_name=cat.name %}"><em>{{ cat.name }}</em></a>{% if not forloop.last %},{% endif %}
                           {% endfor %}
                        </span><br><br>
                      </div>

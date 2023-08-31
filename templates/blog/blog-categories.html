@@ -4,7 +4,7 @@
     </div>
     <ul class="arrows_list">
         {% for name, count in categories.items %}
-        <li><a href="#">{{ name }} - {{count}} </a></li>
+        <li><a href="{% url 'blog:blog_category' cat_name=name %}">{{ name }} - {{count}} </a></li>
         {% endfor %}
     </ul>
 </div>

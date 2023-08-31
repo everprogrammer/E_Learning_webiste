@@ -40,7 +40,7 @@ def postcategories():
     return {'categories': cat_dict}
 
 @register.inclusion_tag('blog/blog-recent-posts.html')
-def latest_posts():
-    posts = Post.objects.filter(published_status=1).order_by('-published_date')[:3]
+def latest_posts(arg=3):
+    posts = Post.objects.filter(published_status=1).order_by('-published_date')[:arg]
 
     return {'latest_posts': posts}

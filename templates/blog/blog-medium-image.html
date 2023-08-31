@@ -26,10 +26,13 @@
     <div class="container">
       <div class="row">
         <div class="col-sm-8 col-md-8 col-lg-8">
+
           <div class="blog_large">
             {% for post in posts %}
             <article class="post">
-              <div class="post_date"> <span class="day">{{ post.published_date|date:'M'}}<a href="#" class="month">{{post.published_date|date:'d' }}</a></span> <span class="icon"><i class="fa fa-file-image-o"></i>
+              <div class="post_date"> <span class="day">{{ post.published_date|date:'M'}}<a href="#"
+                    class="month">{{post.published_date|date:'d' }}</a></span> <span class="icon"><i
+                    class="fa fa-file-image-o"></i>
                 </span> </div>
               <div class="post_content medium">
                 <figure class="post_img">
@@ -50,17 +53,17 @@
                 </figure>
                 <div class="post_meta">
                   <h2> <a href="{% url 'blog:blog_single' pid=post.id %}">{{ post.title }}</a> </h2>
-                  <div class="metaInfo"> <span>By <a href="#" class="admin"> {{post.author.get_full_name}} </a> </span>
+                  <div class="metaInfo"> <span>By <a href="{% url 'blog:blog_author' author_username=post.author.username %}" class="admin"> {{post.author.get_full_name}} </a> </span>
                     <span><a href="#" class="admin">5</a>
-                      Comments</span> <span><a href="#" class="admin"> {{post.counted_views}} </a> views</span></div>
+                      Comments</span> <span><a href="#" class="admin"> {{post.counted_views}} </a> views</span>
+                  </div>
                   <div>
                     <span>
                       {% for cat in post.category.all %}
-                      <a href=""><em>{{ cat.name }}</em></a>{% if not forloop.last %},{% endif %}
+                      <a href="{% url 'blog:blog_category' cat_name=cat.name %}"><em>{{ cat.name }}</em></a>{% if notforloop.last %},{% endif %}
                       {% endfor %}
                     </span><br><br>
                   </div>
-
                   <p>{{ post.content|truncatechars:50 }}</p>
                   <a href="{% url 'blog:blog_single' pid=post.id %}" class="btn btn-small btn-default readmore">Read
                     More</a>
@@ -73,16 +76,16 @@
         </div>
         <aside class="col-sm-4 col-md-4 col-lg-4 sidebar">
           <div class="sidebar_widget">
-        <!--Sidebar Widget-->
-        {% include 'blog/blog-search.html' %}
+            <!--Sidebar Widget-->
+            {% include 'blog/blog-search.html' %}
 
-        {% postcategories %}
+            {% postcategories %}
 
-        {% latest_posts %}
+            {% latest_posts %}
           </div>
         </aside>
 
-        
+
 
       </div>
       <!--/.row-->
