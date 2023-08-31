@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Messages</title>
+    <style>
+        /* Add some basic styles for the pop-up message container */
+        .message-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #f2f2f2;
+            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: 5px;
+            display: none; /* Hidden by default */
+            z-index: 9999; /* Set a high z-index to make sure it's on top */
+        }
+    </style>
+</head>
+<body>
+    {# Existing code for showing messages and form errors #}
+
+    {# Add JavaScript to handle the hiding of the message #}
+    <script>
+        // Function to hide the message
+        function hideMessage() {
+            const messageContainer = document.getElementById('message-container');
+            messageContainer.style.display = 'none';
+        }
+
+        // Show the message and set a timer to hide it after 5 seconds
+        window.onload = function() {
+            const messageContainer = document.getElementById('message-container');
+            if (messageContainer.innerText.trim() !== '') {
+                messageContainer.style.display = 'block';
+                setTimeout(hideMessage, 5000); // 5000 milliseconds = 5 seconds
+            }
+        };
+    </script>
+
+    {# Create the pop-up message container #}
+    <div id="message-container" class="message-container">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert {% if message.tags %} alert-{{ message.tags }}{% endif %}">
+                    {{ message|safe }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+
+    {# Remove the form.errors block, as it's not needed for the pop-up message #}
+
+</body>
+</html>

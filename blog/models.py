@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.urls import reverse
 
 # Create your models here.
 class Category(models.Model):
@@ -13,7 +14,7 @@ class Post(models.Model):
     title = models.CharField(max_length=255)
     content = models.TextField()
     image = models.ImageField(upload_to='blog/', default='blog/default.jpg')
-    category = models.ManyToManyField(Category, null=True)
+    category = models.ManyToManyField(Category)
     author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, default=None)
     counted_views = models.PositiveIntegerField(default=0)
     published_status = models.BooleanField(default=False)
@@ -36,4 +37,6 @@ class Post(models.Model):
             self.counted_views = 0
         super(Post, self).save(*args, **kwargs)
     
+    def get_absolute_url(self):
+        return reverse('blog:blog_single', kwargs={'pid': self.id})
 

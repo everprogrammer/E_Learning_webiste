@@ -33,15 +33,26 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'blog',
-    'website',
+    'django.contrib.humanize',
+    'django.contrib.sites',
+    'django.contrib.sitemaps',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'robots',
+    'blog',
+    'website',
 ]
+
+# sites framework
+SITE_ID = 1
+
+# robots
+ROBOTS_USE_HOST = True
+ROBOTS_USE_SITEMAP = True
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

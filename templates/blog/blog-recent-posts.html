@@ -1,13 +1,19 @@
+{% load humanize %}
+
 <div class="sw_archives">
     <div class="sw_title">
         <h4>Recent Posts</h4>
     </div>
     <ul class="archives_list">
         {% for post in latest_posts %}
-        <li><a href="{% url 'blog:blog_single' pid=post.id %}">
+        <li>
+            <a href="{% url 'blog:blog_single' pid=post.id %}">
                 {{ post.content|truncatechars:30 }}
-            </a></li>
+            </a>
+            <div class="post_date">
+                <em>{{ post.published_date|naturaltime }}</em>
+            </div>
+        </li>
         {% endfor %}
     </ul>
-
 </div>
