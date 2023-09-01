@@ -41,4 +41,19 @@ class Post(models.Model):
     
     def get_absolute_url(self):
         return reverse('blog:blog_single', kwargs={'pid': self.id})
+    
+
+class Comment(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    name = models.CharField(max_length=255)
+    email = models.EmailField()
+    comment = models.TextField()
+    is_approved = models.BooleanField(default=False)
+    created_date = models.DateTimeField(auto_now_add=True)
+    updated_date = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        if len(self.comment) >= 10:
+            return self.comment[:10]
+        return self.comment
 
