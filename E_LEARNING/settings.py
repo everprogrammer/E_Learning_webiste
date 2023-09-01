@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'multi_captcha_admin',
     'django.contrib.humanize',
     'django.contrib.sites',
     'django.contrib.sitemaps',
@@ -47,6 +48,7 @@ INSTALLED_APPS = [
     'website',
     'taggit',
     'django_summernote',
+    'captcha',
 ]
 
 # sites framework
@@ -89,6 +91,10 @@ SUMMERNOTE_CONFIG = {
     },
 }
 
+# Captcha admin settings
+MULTI_CAPTCHA_ADMIN = {
+    'engine': 'simple-captcha',
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
