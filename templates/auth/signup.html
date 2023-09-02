@@ -1,95 +1,75 @@
 {% load static %}
 
 <!doctype html>
-
 <html lang="en">
-  <head>
+
+<head>
+    <title></title>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-    <meta name="generator" content="Hugo 0.84.0">
-    <title>Sign Up</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{% static 'css/login/style.css' %}">
+</head>
 
-    <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/sign-in/">
+<body>
+    <section class="ftco-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-6 text-center mb-5">
+                    <h2 class="heading-section"></h2>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-md-7 col-lg-5">
+                    <div class="login-wrap p-4 p-md-5">
+                        <div class="icon d-flex align-items-center justify-content-center">
+                            <span class="fa fa-user-o"></span>
+                        </div>
+                        <h3 class="text-center mb-4">Sign Up</h3>
+                        <form method="post" action="{% url 'auth_app:signup_view' %}" class="login-form">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <input type="text" name="username" class="form-control rounded-left" placeholder="Username" required>
+                            </div>
+                            <div class="form-group d-flex">
+                                <input type="password" name="password1" class="form-control rounded-left" placeholder="Password"
+                                    required>
+                            </div>
+                            <div class="form-group d-flex">
+                              <input type="password" name="password2" class="form-control rounded-left" placeholder="Confirm Password"
+                                  required>
+                          </div>
+                            <div class="form-group">
+                                <button type="submit"
+                                    class="form-control btn btn-primary rounded submit px-3">Signup</button>
+                            </div>
+                            <div class="form-group d-md-flex">
+                                <div class="w-50">
+                                    <label class="checkbox-wrap checkbox-primary">Remember Me
+                                        <input type="checkbox" checked>
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                                <div class="w-50 text-md-right">
+                                    <a href="#">Forgot Password</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="{% static 'js/login/jquery.min.js' %}"></script>
+    <script src="{% static 'js/login/popper.js' %}"></script>
+    <script src="{% static 'js/login/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/login/main.js' %}"></script>
+    <script defer
+        src="https://static.cloudflareinsights.com/beacon.min.js/v8b253dfea2ab4077af8c6f58422dfbfd1689876627854"
+        integrity="sha512-bjgnUKX4azu3dLTVtie9u6TKqgx29RBwfj3QXYt5EKfWM/9hPSAI/4qcV5NACjwAo8UtTeWefx6Zq5PHcMm7Tg=="
+        data-cf-beacon='{"rayId":"8004d6423fce2c56","version":"2023.8.0","b":1,"token":"cd0b4b3a733644fc843ef0b185f98241","si":100}'
+        crossorigin="anonymous"></script>
+</body>
 
-    
-
-    <!-- Bootstrap core CSS -->
-<link href="/docs/5.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
-    <!-- Favicons -->
-<link rel="apple-touch-icon" href="/docs/5.0/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
-<link rel="icon" href="/docs/5.0/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
-<link rel="icon" href="/docs/5.0/assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
-<link rel="manifest" href="/docs/5.0/assets/img/favicons/manifest.json">
-<link rel="mask-icon" href="/docs/5.0/assets/img/favicons/safari-pinned-tab.svg" color="#7952b3">
-<link rel="icon" href="/docs/5.0/assets/img/favicons/favicon.ico">
-<meta name="theme-color" content="#7952b3">
-
-
-    {% comment %} <style>
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        user-select: none;
-      }
-
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-        }
-      }
-    </style> {% endcomment %}
-
-    <link rel='stylesheet' href="{% static 'css/bootstrap.css' %}">
-
-    
-    {% comment %} <!-- Custom styles for this template --> {% endcomment %}
-    <link href="{% static 'css/signin.css' %}" rel="stylesheet">
-
-  </head>
-  <body class="text-center">
-    {% if messages %}
-    <ul class="messages">
-        {% for message in messages %}
-        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-        {% endfor %}
-    </ul>
-    {% endif %}
-    
-<main class="form-signin">
-  <form method="post" action="{% url 'accounts:signup' %}">
-
-    {% csrf_token %}
-
-    <h1 class="h3 mb-3 fw-normal">Sign up</h1>
-
-    <div class="form-floating">
-      <input type="text" name="username" class="form-control" placeholder="Username">
-    </div>
-    <div class="form-floating">
-      <input type="text" name="email" class="form-control" placeholder="email">
-    </div>
-    <div class="form-floating">
-      <input type="password" name="password1" class="form-control" placeholder="Password">
-    </div>
-    <div class="form-floating">
-        <input type="password" name="password2" class="form-control" placeholder="Confirm Password">
-    </div> 
-
-    {% comment %} <div class="checkbox mb-3">
-      <label>
-        <input type="checkbox" value="remember-me"> Remember me
-      </label>
-    </div> {% endcomment %}
-    <button class="w-100 btn btn-lg btn-primary" type="submit">Sign up</button>
-    <p class="mt-5 mb-3 text-muted">&copy; 2017-2021</p>
-  </form>
-</main>
-
-  </body>
 </html>
-

@@ -2,9 +2,8 @@ from django.shortcuts import render, get_object_or_404
 from .models import Post, Comment
 from django.core.paginator import (Paginator, EmptyPage, PageNotAnInteger)
 from .forms import CommentForm
-from django.http import HttpResponseRedirect
 from django.contrib import messages
-
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def blog_view(request, **kwargs):

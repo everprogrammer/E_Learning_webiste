@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth.decorators import login_required
+from django.urls import reverse
 
 # Create your views here.
 def login_view(request):
@@ -19,8 +21,21 @@ def login_view(request):
         return render(request, 'auth/login.html', context)
     return redirect('/')
 
-# def login_view(request):
-#     pass
+@login_required
+def logout_view(request):
+    logout(request)
+    return redirect('/')
 
 def signup_view(request):
-    return render(request, 'auth/signup.html')
+    if not request.user.is_authenticated:
+        if request.method == 'POST':
+            form = UserCreationForm(data=request.POST)
+            if form.is_valid():
+                form.save()
+                return redirect('/')
+            
+        form = UserCreationForm()
+        context = {'form': form}
+        return render(request, 'auth/signup.html', context)
+    else:
+        return redirect('/')

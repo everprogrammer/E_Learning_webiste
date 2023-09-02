@@ -56,6 +56,7 @@
                     <ul class="language">
                         {% if request.user.is_authenticated %}
                         <li><a>Logged in as {{ request.user.username }}</a></li>
+                        <li><a href="{% url 'auth_app:logout_view' %}">Logout</a></li>
                         {% else %}
                         <li><a href="{% url 'auth_app:login_view' %}">Login</a></li>
                         <li><a href="{% url 'auth_app:signup_view' %}">Signup</a></li>
