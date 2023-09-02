@@ -61,76 +61,43 @@
                   <p> {{ post.content }} </p>
                 </div>
               </div>
+
+              
               <section id="comments">
-                <h6 class="section-title">3 Comments</h6>
+                <h6 class="section-title">{{comments|length}} Comments</h6>
                 <p>Comments are optional and I am editable! Whoop!</p>
+                {% for comment in comments %}
                 <ol class="comments-list">
                   <li class="comment">
                     <article> <img src="http://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm&amp;s=50"
                         alt="Image" class="avatar">
                       <div class="comment-meta">
-                        <h5 class="author">Admin, January 06, 2011 . <a href="#" class="comment-reply-link">Reply</a>
+                        <h5 class="author">{{comment.name}}, {{comment.created_date|date:"M. d, Y"}} <a href="#" class="comment-reply-link">Reply</a>
                         </h5>
                       </div>
                       <!-- end .comment-meta -->
-
                       <div class="comment-body">
-                        <p>Morbi velit eros, sagittis in facilisis non, rhoncus et erat. Nam posuere tristique sem, eu
-                          ultricies tortor imperdiet vitae. Curabitur lacinia neque non metus.</p>
+                        <p> {{comment.comment}} </p>
                       </div>
                       <!-- end .comment-body -->
-
-                    </article>
-                    <ul class="children">
-                      <li class="comment">
-                        <article> <img
-                            src="http://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm&amp;s=50"
-                            alt="Image" class="avatar">
-                          <div class="comment-meta">
-                            <h5 class="author">Admin, January 06, 2011 . <a href="#"
-                                class="comment-reply-link">Reply</a></h5>
-                          </div>
-                          <!-- end .comment-meta -->
-
-                          <div class="comment-body">
-                            <p>Morbi velit eros, sagittis in facilisis non, rhoncus et erat. Nam posuere tristique sem,
-                              eu ultricies tortor imperdiet vitae. Curabitur lacinia neque non metus.</p>
-                          </div>
-                          <!-- end .comment-body -->
-
-                        </article>
-                      </li>
-                    </ul>
+                    </article> 
                     <!-- end .children -->
-
-                  </li>
-                  <li class="comment">
-                    <article> <img src="http://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm&amp;s=50"
-                        alt="Image" class="avatar">
-                      <div class="comment-meta">
-                        <h5 class="author">Admin, January 06, 2011 . <a href="#" class="comment-reply-link">Reply</a>
-                        </h5>
-                      </div>
-                      <!-- end .comment-meta -->
-
-                      <div class="comment-body">
-                        <p>Morbi velit eros, sagittis in facilisis non, rhoncus et erat. Nam posuere tristique sem, eu
-                          ultricies tortor imperdiet vitae. Curabitur lacinia neque non metus.</p>
-                      </div>
-                      <!-- end .comment-body -->
-
-                    </article>
-                  </li>
+                  </li> 
+                  {% empty %}
+                  <p>There is no comment to show!</p>
                 </ol>
+                {% endfor %}
               </section>
 
               <section id="respond">
                 <div class="row">
                   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 blogleft contact">
-                    <form method="post" action="#" name="cform" id="cform">
+                    <form method="post" action="{% url 'blog:blog_single' pid=post.id %}" >
+                      {% csrf_token %}
                       <h3 class="contactTitle">Leave a Comment</h3>
-                      <p>Curabitur tincidunt est sit amet nibh imperdiet dapibus. Praesent tristique diam eros,</p>
+                      <p>Please share your thoughts with us!</p>
                       <div class="row">
+                        <input type="hidden" name="post" value="{{post.id}}">
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 form-group form-row">
                           <input type="text" class="normal" id="name" placeholder="Name" name="name">
                         </div>
@@ -142,7 +109,7 @@
                       </div>
                       <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 form-group form-row">
-                          <textarea name="comments" placeholder="Comments" rows="4" class="normal"></textarea>
+                          <textarea name="comment" placeholder="Comments" rows="4" class="normal"></textarea>
                         </div>
                       </div>
                       <div class="row">
