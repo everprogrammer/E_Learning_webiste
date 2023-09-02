@@ -54,14 +54,12 @@
             <div class="container">
                 <div class="row relative">
                     <ul class="language">
-                        <li> <a href="#" data-toggle="dropdown">English</a><i class="fa fa-caret-down"></i>
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="#" class="french">French</a></li>
-                                <li><a href="#" class="italian">Italian</a></li>
-                                <li><a href="#" class="spanish">Spanish</a></li>
-                                <li><a href="#" class="portuguese">Portuguese</a></li>
-                            </ul>
-                        </li>
+                        {% if request.user.is_authenticated %}
+                        <li><a>Logged in as {{ request.user.username }}</a></li>
+                        {% else %}
+                        <li><a href="{% url 'auth_app:login_view' %}">Login</a></li>
+                        <li><a href="{% url 'auth_app:signup_view' %}">Signup</a></li>
+                        {% endif %}
                     </ul>
                 </div>
             </div>
