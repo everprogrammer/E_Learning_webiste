@@ -26,6 +26,7 @@ def blog_view(request, **kwargs):
     return render(request, 'blog/blog-medium-image.html', context)
 
 def blog_single(request, pid):
+    
     if request.method == 'POST':
         form = CommentForm(request.POST)
         if form.is_valid():
@@ -36,9 +37,12 @@ def blog_single(request, pid):
     posts = Post.objects.filter(published_status=1)
     post = get_object_or_404(posts, pk=pid)
     post.increase_views()
+    next_post = Post.objects.filter(id__gt=post.id).order_by('id').first()
+    previous_post = Post.objects.filter(id__lt=post.id).order_by('-id').first()
     comments = Comment.objects.filter(post=post.id, is_approved=True)
     form = CommentForm()
-    context = {'post': post, 'comments': comments, 'form': form}
+    context = {'post': post, 'comments': comments, 'form': form,
+               'next_post': next_post, 'previous_post': previous_post}
     return render(request, 'blog/blog-single.html', context)
 
 def blog_search(request):
