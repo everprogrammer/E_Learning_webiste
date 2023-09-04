@@ -6,9 +6,9 @@ from E_LEARNING.settings import *
 SECRET_KEY = 'django-insecure-*tezh%5njx^tg*+7ru7hsk0gwp4e*52-=n99%qf*p)9*4!#qe+'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['amirschools.ir', 'www.amirschools.ir']
 
 # Application definition
 
