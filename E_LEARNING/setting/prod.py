@@ -39,11 +39,14 @@ SITE_ID = 1
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'amirscho_final',
+        'USER': 'amirscho_final',
+        'PASSWORD': 'AmirSchool1',
+        'HOST': 'localhost',
+        'PORT': '3306',
     }
 }
-
 # STATIC_ROOT = BASE_DIR / 'static'
 MEDIA_ROOT = BASE_DIR / 'media'
 
