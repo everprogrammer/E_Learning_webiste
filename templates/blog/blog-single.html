@@ -29,8 +29,8 @@
         <div class="col-sm-8 col-md-8 col-lg-8">
           <div class="blog_large">
             <article class="post">
-              <div class="post_date"> <span class="day">{{ post.published_date|date:"d"}}<a href="#" class="month">{{ post.published_date|date:"M" }}</a></span> <span class="icon"><i
-                    class="fa fa-file-image-o"></i> </span> </div>
+              <div class="post_date"> <span class="day">{{ post.published_date|date:"d"}}<a href="#" class="month">{{ post.published_date|date:"M" }}</a></span> 
+                <span class="icon"><i class="fa fa-file-image-o"></i> </span> </div>
               <div class="post_content medium">
                 <figure class="post_img">
 
@@ -49,7 +49,7 @@
                 </figure>
                 <div class="post_meta">
                   <h2> {{ post.title }} </h2>
-                  <div class="metaInfo"> <span>By <a href="#" class="admin">{{ post.author.get_full_name }}</a> </span> <span><a href="#" class="admin">5</a>
+                  <div class="metaInfo"> <span>By <a href="{% url 'blog:blog_author' author_username=post.author.username %}" class="admin">{{ post.author.get_full_name }}</a> </span> <span><a href="#" class="admin">{% count_comments post.id %}</a>
                       Comments</span> <span><a href="#" class="admin">{{ post.counted_views }}</a> views</span></div>
                       <div>
                         <span>
@@ -83,7 +83,7 @@
               
               
               <section id="comments">
-                <h6 class="section-title">{{comments|length}} Comments</h6>
+                <h6 class="section-title">{% count_comments post.id %} Comments</h6>
                 <p>Comments are optional and I am editable! Whoop!</p>
                 {% for comment in comments %}
                 <ol class="comments-list">

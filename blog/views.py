@@ -39,7 +39,7 @@ def blog_single(request, pid):
     post.increase_views()
     next_post = Post.objects.filter(id__gt=post.id).order_by('id').first()
     previous_post = Post.objects.filter(id__lt=post.id).order_by('-id').first()
-    comments = Comment.objects.filter(post=post.id, is_approved=True)
+    comments = Comment.objects.filter(post=post.id, is_approved=True).order_by('-created_date')
     form = CommentForm()
     context = {'post': post, 'comments': comments, 'form': form,
                'next_post': next_post, 'previous_post': previous_post}

@@ -51,16 +51,18 @@
                     </div>
                   </div>
                 </figure>
-                <div class="post_meta">
-                  <h2> <a href="{% url 'blog:blog_single' pid=post.id %}">{{ post.title }}</a> </h2>
-                  <div class="metaInfo"> <span>By <a href="{% url 'blog:blog_author' author_username=post.author.username %}" class="admin"> {{post.author.get_full_name}} </a> </span>
-                    <span><a href="#" class="admin">5</a>
-                      Comments</span> <span><a href="#" class="admin"> {{post.counted_views}} </a> views</span>
-                  </div>
+                  <div class="post_meta">
+                    <h2> <a href="{% url 'blog:blog_single' pid=post.id %}">{{ post.title }}</a> </h2>
+                    {% if post.author.username %}
+                    <div class="metaInfo"> <span>By <a href="{% url 'blog:blog_author' author_username=post.author.username %}" class="admin"> {{post.author.username}} </a> </span>
+                    {% endif %}
+                      <span><a href="#" class="admin"> {% count_comments post.id %} </a> Comments</span> 
+                      <span><a href="#" class="admin"> {{post.counted_views}} </a> views</span>
+                    </div>
                   <div>
                     <span>
                       {% for cat in post.category.all %}
-                      <a href="{% url 'blog:blog_category' cat_name=cat.name %}"><em>{{ cat.name }}</em></a>{% if notforloop.last %},{% endif %}
+                      <a href="{% url 'blog:blog_category' cat_name=cat.name %}"><em>{{ cat.name }}</em></a>{% if notforloop.last %}, {% endif %}
                       {% endfor %}
                     </span><br><br>
                   </div>
